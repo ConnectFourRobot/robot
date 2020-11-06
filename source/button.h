@@ -1,29 +1,12 @@
-#define eventIsSet(ev) (events & ev)
-#define servoPin 6
+#include "state.h"
+#include "Arduino.h"
 #define sButton  8
 
-#define Q1 1
-#define Q2 2
-
 short trigger = 0;
-short events = 0;
-
-void setup() {
- pinMode(sButton, INPUT);
- digitalWrite(sButton, LOW);
- Serial.begin(115200);
-}
-
-void clearEvent(int ev){
-  events = events & (~ev);
-}
-
-void setEvent(int ev){
-  events = ev | ev;
-}
 
 void Button(){
   while(1){
+    delay(50);
     if(digitalRead(sButton)== 0){
       trigger = digitalRead(sButton);
     }
@@ -38,7 +21,4 @@ void Button(){
       }
     }
   }
-}
-void loop() {
-  Button();
 }
