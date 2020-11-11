@@ -1,4 +1,5 @@
-#include "Button.h"
+#include "button.h"
+#define sButton  8
 
 void setup() {
  pinMode(sButton, INPUT);
@@ -7,5 +8,10 @@ void setup() {
 }
 
 void loop() {
-   Button();
+   if(checkButton(sButton)){
+    Serial.println("On");
+   }
+   else{
+    Serial.println("Off");
+   }
 }

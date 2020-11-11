@@ -1,24 +1,23 @@
 #include "state.h"
 #include "Arduino.h"
-#define sButton  8
 
-short trigger = 0;
+int buttonState = LOW;
+int lastButtonState =  LOW;
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;
 
-void Button(){
-  while(1){
-    delay(50);
-    if(digitalRead(sButton)== 0){
-      trigger = digitalRead(sButton);
-    }
-    if(digitalRead(sButton)==1 && trigger ==0){
-      trigger = digitalRead(sButton);
-      if(eventIsSet(Q2)){
-        clearEvent(Q2);
-        Serial.println("Aus");
-      }else{
-        Serial.println("Ein");
-        setEvent(Q2);
-      }
+int checkButton(int pinButton){
+  int reading = digitalRead(pinButton);
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+  
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    
+    if (reading != buttonState) {
+      buttonState = reading;
     }
   }
+  lastButtonState = reading;
+  return buttonState;
 }
