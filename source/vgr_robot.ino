@@ -31,51 +31,51 @@ void setup() {
 void loop() {
 
 	switch (state) {
-	case STATE_BOOTING:
-		screen->updateMenu(STATE_BOOTING, 0);
-																			//TODO: wait for serial READY Message 
-		state = STATE_READY;
-		break;
-	case STATE_READY:
-		screen->updateMenu(STATE_READY, 0);
-		if (startButton.buttonPressed()) {
-		 state = STATE_CHOOSEDIFFICULTY;
-		 screen->resetLastSelectedOption();
-		}
-		break;
-	case STATE_CHOOSEDIFFICULTY: 
-		screen->updateMenu(STATE_CHOOSEDIFFICULTY, 0);
-		screen->updateSelectableOptions(state, poti.getSelectedOption());
-		poti.changeSelection();
-		if(poti.buttonPressed()){
-			state = STATE_PLAYORDER;
-			screen->resetLastSelectedOption();
-			int difficulty = poti.getSelectedOption();
-		}
-		break;
-	case STATE_PLAYORDER:
-		screen->updateMenu(STATE_PLAYORDER, 0);
-		screen->updateSelectableOptions(state,poti.getSelectedOption());
-		poti.changeSelection();
-		if(poti.buttonPressed()){
-			state = STATE_PLAYORDER;
-			int playorder = poti.getSelectedOption();
-		}
-		break;
-	case STATE_REQUEST:
-		state = STATE_ANSWER;
-		break;
-	case STATE_ANSWER:
-		state = STATE_MOVE;
-		break;
-	case STATE_MOVE:
-		state = STATE_REQUEST;
-		break;
-	case STATE_STOPGAME:
-		state = STATE_ENDGAME;
-		break;
-	case STATE_ENDGAME:
-		state = STATE_READY;
-		break;
+		case STATE_BOOTING:
+			screen->updateMenu(STATE_BOOTING, 0);
+																				//TODO: wait for serial READY Message 
+			state = STATE_READY;
+			break;
+		case STATE_READY:
+			screen->updateMenu(STATE_READY, 0);
+			if (startButton.buttonPressed()) {
+			 state = STATE_CHOOSEDIFFICULTY;
+			 screen->resetLastSelectedOption();
+			}
+			break;
+		case STATE_CHOOSEDIFFICULTY: 
+			screen->updateMenu(STATE_CHOOSEDIFFICULTY, 0);
+			screen->updateSelectableOptions(state, poti.getSelectedOption());
+			poti.changeSelection();
+			if(poti.buttonPressed()){
+				state = STATE_PLAYORDER;
+				screen->resetLastSelectedOption();
+				int difficulty = poti.getSelectedOption();
+			}
+			break;
+		case STATE_PLAYORDER:
+			screen->updateMenu(STATE_PLAYORDER, 0);
+			screen->updateSelectableOptions(state,poti.getSelectedOption());
+			poti.changeSelection();
+			if(poti.buttonPressed()){
+				state = STATE_PLAYORDER;
+				int playorder = poti.getSelectedOption();
+			}
+			break;
+		case STATE_REQUEST:
+			state = STATE_ANSWER;
+			break;
+		case STATE_ANSWER:
+			state = STATE_MOVE;
+			break;
+		case STATE_MOVE:
+			state = STATE_REQUEST;
+			break;
+		case STATE_STOPGAME:
+			state = STATE_ENDGAME;
+			break;
+		case STATE_ENDGAME:
+			state = STATE_READY;
+			break;
 	}
-	}
+}
