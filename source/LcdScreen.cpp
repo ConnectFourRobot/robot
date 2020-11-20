@@ -6,7 +6,7 @@ void LcdScreen::updateMenu(int state, int sCursor)
 	if (state != this->_lastState){
 		this->_lcd->clear();
 		this->_lcd->setCursor(0, sCursor);
-		this->_lcd->print(this->messages[state]);
+		this->_lcd->print(this->_messages[state]);
 		this->_lastState = state;
 	}
 }
@@ -21,14 +21,14 @@ void LcdScreen::clearRow(int row)
 
 void LcdScreen::updateSelectableOptions(int state, int option)
 {
-	if (option != this->_lastSelectedOption) {
+	if (option != this->_lastSelectedOption) {			// avoid updating screen with the same output
 		this->clearRow(1);
 		this->_lcd->setCursor(0, 1);
 		if (state == 2) {								//TODO change hardcoded number
-			this->_lcd->print(Difficulty[option]);
+			this->_lcd->print(_difficulty[option]);
 		}
 		else{
-			this->_lcd->print(Playorder[option]);
+			this->_lcd->print(_playorder[option]);
 		}
 		this->_lastSelectedOption = option;
 	}
@@ -42,6 +42,6 @@ void LcdScreen::initDisplay()
 
 void LcdScreen::resetLastSelectedOption()
 {
-	this->_lastSelectedOption = -1;
+	this->_lastSelectedOption = -1;					// set value to -1 to update the selectable options
 }
 
