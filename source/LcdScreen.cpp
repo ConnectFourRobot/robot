@@ -14,7 +14,9 @@ void LcdScreen::updateMenu(int state, int sCursor)
 void LcdScreen::clearRow(int row)
 {
 	this->_lcd->setCursor(0, row);
-	this->_lcd->print("                ");				//TODO think about better solution
+	for (int i = 0; i < 16; i++) {
+		this->_lcd->print(" ");
+	}
 }
 
 void LcdScreen::updateSelectableOptions(int state, int option)
