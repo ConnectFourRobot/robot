@@ -3,16 +3,17 @@
 
 void PotiButton::changeSelection() {
 	this->_potiValue = analogRead(this->_potiPin);
+	int range = this->_potiMaxValue / this->_numOfRanges;
 	if (this->_potiValue != this->_previousPotiValue) {
-		if (this->_potiValue < this->_potiRanges[0]) {
+		if (this->_potiValue < range) {
 			this->_selectedOption = MenuItem::FIRST;
 
 		}
-		if (this->_potiValue > this->_potiRanges[0] && this->_potiValue < this->_potiRanges[1]) {
+		if (this->_potiValue > 300 && this->_potiValue < range * 2) {
 			this->_selectedOption = MenuItem::SECOND;
 
 		}
-		if (this->_potiValue > this->_potiRanges[1]) {
+		else if (this->_potiValue > range * 2) {
 			this->_selectedOption = MenuItem::THIRD;
 		}
 
@@ -26,9 +27,4 @@ int PotiButton::getSelectedOption()
 	return this->_selectedOption;
 }
 
-void PotiButton::setPotiRanges(int firstSection, int secondSection, int thirdSection)
-{
-	this->_potiRanges[0] = firstSection;
-	this->_potiRanges[1] = secondSection;
-	this->_potiRanges[2] = thirdSection;
-}
+

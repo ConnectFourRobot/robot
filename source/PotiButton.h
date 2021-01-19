@@ -1,3 +1,4 @@
+
 #ifndef POTIBUTTON_H
 #define POTIBUTTON_H
 
@@ -11,16 +12,17 @@ private:
 	int _potiValue = 0;
 	int _previousPotiValue = 0;
 	int _potiPin = 0;
-	int _potiRanges[3] = { 344, 688, 1024 };
+	int _potiMaxValue = 0;
+	int _numOfRanges = 0;
+
 public:
 	PotiButton() {};
-	PotiButton(int inputPin, int buttonState, int potiPin) : Button(inputPin, buttonState), _potiPin(potiPin) {};
-	PotiButton(int inputPin, int buttonState, int lastButtonState, int potiPin) : Button(inputPin, buttonState, lastButtonState), _potiPin(potiPin) {};
-	PotiButton(int inputPin, int buttonState, int lastButtonState, long debounceDelay, int potiPin) : Button(inputPin, buttonState, lastButtonState, debounceDelay), _potiPin(potiPin) {};
+
+	PotiButton(int inputPin, int buttonState, int lastButtonState, long debounceDelay, int potiPin, int potiMaxValue, int numOfRanges) :
+		Button(inputPin, buttonState, lastButtonState, debounceDelay), _potiPin(potiPin), _potiMaxValue(potiMaxValue), _numOfRanges(numOfRanges) {};
 
 	void changeSelection();
 	int getSelectedOption();
-	void setPotiRanges(int firstSection, int secondSection, int thirdSection);
 };
 
 
