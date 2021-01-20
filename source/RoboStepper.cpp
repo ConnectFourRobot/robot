@@ -51,6 +51,7 @@ bool RoboStepper::positionReached()
 void RoboStepper::setHomePositionReached()
 {
 	this->_axisStepper->setCurrentPosition(0);
+	this->_axisStepper->moveTo(0);
 }
 
 void RoboStepper::setRunAllowed(bool value) {
