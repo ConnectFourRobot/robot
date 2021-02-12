@@ -4,21 +4,23 @@
 bool Button::buttonPressed()
 {
 	int newButtonState = digitalRead(this->_buttonPin);
-
+	unsigned long currentMillis = millis();
 	// update lastDebounceTime
-	if (newButtonState != this->_lastButtonState) {
-		this->_lastDebounceTime = millis();
-	}
+	if ((currentMillis - this->_lastDebounceTime) > this->_debounceDelay) {
+		this->_lastDebounceTime = currentMillis;
 
-	if ((millis() - this->_lastDebounceTime) > this->_debounceDelay) {
-		
-		if (newButtonState != this->_buttonState) {
-			this->_buttonState = newButtonState;
-
+		if (newButtonState != this->_buttonState && newButtonState != this->_lastButtonState) {
+			this->_lastButtonState = newButtonState;
 			return true;
 		}
+		else {
+			this->_lastButtonState = newButtonState;
+			return false;
+		}
+
 	}
-	this->_lastButtonState = newButtonState;
-	return false;
-} 
+	else {
+		return false;
+	}
+}
 
