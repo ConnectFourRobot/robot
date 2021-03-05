@@ -1,2 +1,2 @@
-# Vier-Gewinnt-Roboter (Roboter)
-Das ist die Hardware-Steuerung des Roboters. Diese läuft auf einem Arduino-Mikrocontroller und steuert einen Servo und einen Schrittmotor.
+# ConnectFourRobot (Robot)
+This is the code for the Arduino. It controls the servo, as well as the stepper motor.
